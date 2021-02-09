@@ -1,5 +1,7 @@
 '''
 Move data from Google Cloud SQL to Google Firestore.
+Each table will be entitled to a single Firestore Collection,
+and each row will be its own document.
 
 Author: Marvin D. Tensuan
 

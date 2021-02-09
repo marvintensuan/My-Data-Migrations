@@ -29,15 +29,19 @@ COLLECTION_NAMES = [
 FOR_UPLOAD = dict.fromkeys(COLLECTION_NAMES)
 
 def convert_table_from_Cloud_SQL(table_name):
+    # Execute query in a database
     db.execute(f'SELECT * from {table_name};')
+
+    # Extract column names and data; then run through `list_of_dictionaries`
     col_names = db.table_headers()
-    
     table_data = db.fetchall()
+    return list_of_dictionaries(col_names, table_data)
 
-    data_list = list_of_dictionaries(col_names, table_data)
-    return data_list
 
-# cur.execute('SELECT * FROM mt_backend_cpd;')
+for collection, table in zip(COLLECTION_NAMES, TABLE_NAMES):
+    FOR_UPLOAD[collection] = convert_table_from_Cloud_SQL(table)
 
 # Close database connection.
 db.close()
+
+# TODO: Upload to Firestore.

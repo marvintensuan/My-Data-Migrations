@@ -6,12 +6,12 @@ Author: Marvin D. Tensuan
 Related repository: https://github.com/marvintensuan/cv-django
 '''
 
-import psycopg2
+from Connection import * #pylint: disable=unused-wildcard-import
 from env_load_env_variables import PSQL_CONN_ARG
+from helper import *
 
 # Initialize database connection
-conn = psycopg2.connect(PSQL_CONN_ARG)
-cur = conn.cursor()
+db = Connection(PSQL_CONN_ARG)
 
 TABLE_NAMES = [
     'mt_backend_cpd',
@@ -19,8 +19,25 @@ TABLE_NAMES = [
     'mt_backend_sdl_webinars'
 ]
 
+COLLECTION_NAMES = [
+    i.replace('mt_backend', 'flaskapp2')
+    for i in TABLE_NAMES
+]
+
+FOR_UPLOAD = dict.fromkeys([COLLECTION_NAMES)
+
+def get_table_from_Cloud_SQL(table_name):
+    db.execute(f'SELECT * from {table_name}')
+    col_names = db.table_headers()
+    
+    table_data = db.fetchall()
+
+    data_list = list_of_dictionaries(col_names, table_data)
+    return data_list
+
+
+
 # cur.execute('SELECT * FROM mt_backend_cpd;')
 
 # Close database connection.
-cur.close()
-conn.close()
+db.close()

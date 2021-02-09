@@ -28,7 +28,7 @@ COLLECTION_NAMES = [
 
 FOR_UPLOAD = dict.fromkeys(COLLECTION_NAMES)
 
-def get_table_from_Cloud_SQL(table_name):
+def convert_table_from_Cloud_SQL(table_name):
     db.execute(f'SELECT * from {table_name};')
     col_names = db.table_headers()
     
@@ -36,8 +36,6 @@ def get_table_from_Cloud_SQL(table_name):
 
     data_list = list_of_dictionaries(col_names, table_data)
     return data_list
-
-
 
 # cur.execute('SELECT * FROM mt_backend_cpd;')
 

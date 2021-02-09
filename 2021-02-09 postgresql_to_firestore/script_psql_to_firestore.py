@@ -24,10 +24,10 @@ COLLECTION_NAMES = [
     for i in TABLE_NAMES
 ]
 
-FOR_UPLOAD = dict.fromkeys([COLLECTION_NAMES)
+FOR_UPLOAD = dict.fromkeys(COLLECTION_NAMES)
 
 def get_table_from_Cloud_SQL(table_name):
-    db.execute(f'SELECT * from {table_name}')
+    db.execute(f'SELECT * from {table_name};')
     col_names = db.table_headers()
     
     table_data = db.fetchall()

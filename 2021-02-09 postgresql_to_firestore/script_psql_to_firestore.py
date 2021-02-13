@@ -58,4 +58,4 @@ if __name__ == '__main__':
     for coll, docs in FOR_UPLOAD.items():
         for doc in docs:
             doc_name = rand_string(5)
-            fs.collection(coll).document(doc_name).set()
+            fs.collection(coll).document(doc_name).set(doc)

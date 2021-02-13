@@ -8,6 +8,9 @@ Author: Marvin D. Tensuan
 Related repository: https://github.com/marvintensuan/cv-django
 '''
 
+from random import choice
+from string import ascii_letters
+
 from Connection import Connection
 from env_load_env_variables import PSQL_CONN_ARG
 from google.cloud import firestore
@@ -47,3 +50,9 @@ db.close()
 
 # TODO: Upload to Firestore.
 fs = firestore.Client()
+
+def rand_string(length):
+    return ''.join([choice(ascii_letters) for _ in range(length)])
+
+for coll, docs in FOR_UPLOAD.items():
+    ...

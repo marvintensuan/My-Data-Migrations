@@ -23,7 +23,7 @@ TABLE_NAMES = [
 ]
 
 COLLECTION_NAMES = [
-    i.replace('mt_backend', 'flaskapp2')
+    i.replace('mt_backend', 'mrvn_flask')
     for i in TABLE_NAMES
 ]
 
@@ -46,3 +46,4 @@ for collection, table in zip(COLLECTION_NAMES, TABLE_NAMES):
 db.close()
 
 # TODO: Upload to Firestore.
+fs = firestore.Client()

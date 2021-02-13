@@ -56,6 +56,7 @@ if __name__ == '__main__':
     fs = firestore.Client()
 
     for coll, docs in FOR_UPLOAD.items():
+        print('Uploading', coll, '...\n')
         for doc in docs:
             doc_name = rand_string(5)
             fs.collection(coll).document(doc_name).set(doc)

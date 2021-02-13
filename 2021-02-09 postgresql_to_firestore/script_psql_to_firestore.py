@@ -8,8 +8,9 @@ Author: Marvin D. Tensuan
 Related repository: https://github.com/marvintensuan/cv-django
 '''
 
-from Connection import * #pylint: disable=unused-wildcard-import
+from Connection import Connection
 from env_load_env_variables import PSQL_CONN_ARG
+from google.cloud import firestore
 from helper import *
 
 # Initialize database connection
@@ -32,7 +33,7 @@ def convert_table_from_Cloud_SQL(table_name):
     # Execute query in a database
     db.execute(f'SELECT * from {table_name};')
 
-    # Extract column names and data; then run through `list_of_dictionaries`
+    # Extract column names and data; then run through `helper.list_of_dictionaries`
     col_names = db.table_headers()
     table_data = db.fetchall()
     return list_of_dictionaries(col_names, table_data)
